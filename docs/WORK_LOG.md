@@ -1,10 +1,15 @@
 # ThumbRemote 工作日志
 
-## 2026-10-28 MatePad 双HID服务实板验证进行中
+## 2026-10-28 MatePad 点击暂停与GitHub交付
+
+- 用户说“平板点击功能可以先不做，额度快不够了”，本轮立即停止平板点击开发和烧录；保留已完成工作、既有配对及当前板内61f1固件。61f1版平板上下滑获用户反馈有效，点击无效；OPPO在该版尚未回归，不沿用8dceb的手机成功反馈充当61f1版验证。
+- 原生单HID试验涉及`dual_ble_transport.cpp`、`dual_service_setup.h`、`dual_native_hid.h`及测试，保留为本地未提交工作；在用户暂停前未完成最终验证、未刷写，不纳入本次公开基线。公开Git版本以已编译烧录并获平板上下滑反馈的61f1双HID试验版为准，明确记录平板点击不可用。后续若恢复开发，先核对工作区未提交文件、诊断与恢复产物，不从Git仓库误判实验已经完成。
 
 - 新源码 `61f1da63d7a7e1e0cfb63d183dfadd3c71f687f6abb64a83ae7e306a974cf2a5` 的编译产物、完整manifest及主机测试运行输出已存在；原运行会话因跨日不可恢复，不能宣称重新观察到该verify退出码。构建日志程序642679字节、RAM19432，manifest绑定完整二进制及源；`upload -Target dual -Port COM7`验证源码和清单、touch恢复产物、唯一CH343及ROM C3后退出0，四段写入校验通过。未整片擦除或清绑定。
 - 被动串口启动日志`serial-composite-startup.log`：GATT_READY，App event=52/start=55、keyboard=29、digitizer=42，两个输入句柄不同；profile=registered，最初advertising1，随后一个安全绑定连接route=hid_arrow、hid_ready1、digitizer_ready0、errors0。该连接身份未确认，不能据此说是MatePad或数字笔被识别。已请用户在MatePad系统蓝牙确认连接后测试上下滑、单击与指针；等待反馈，不删除配对。
-- GitHub任务：用户明确选择Ghz-byte账户公开新建ThumbRemote，并授权结束后上传。当前仓库无提交/remote；尚未创建GitHub仓库或推送。发布前已将两份历史文档中的本机用户名绝对路径改为工作区或环境变量，静态扫描未发现常见凭据、MAC或邮箱；准备首次Git提交时使用GitHub no-reply提交邮箱，避免公开本机真实邮箱。
+- 用户在确认MatePad连接并操作上下滑和轻点的步骤下反馈“轻点没反应，上下有反应了”；对应`serial-matepad-separate-test.log`记录连接断开重连后route=hid_arrow、hid_ready1、digitizer_ready0，上下滑分别产生0x51/0x52与零释放通知rc0，轻点识别为tap但因未订阅数字报告被拒绝。上下翻页以用户反馈为准；点击当前无效。缓存未刷新、宿主不处理第二HID服务或数字笔类型均为可能性，不能凭现有数据断定其中原因，不清绑定或主动切换鼠标方案。
+- `df50d95`为用户授权的首次本地Git提交（110个源码/文档文件，no-reply作者邮箱）；忽略构建目录、工具缓存和临时日志。公开前已将两份历史文档中的本机用户名绝对路径改为工作区或环境变量，静态扫描未发现常见凭据、MAC或邮箱；公开仓库创建和推送结果须以实际命令输出记录。
+- 单服务跟进曾尝试项目内固定SDK自带NimBLE API及真实句柄订阅；用户暂停时本地改动未完成最终验证、未上传至开发板或GitHub。不要在暂停期间继续该试验。
 
 ## 2026-10-27 MatePad 点击实施（正在排查启动）
 
