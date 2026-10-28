@@ -1,0 +1,6 @@
+<resources>
+    <style name="Theme.ThumbRemote" parent="Base.Theme.ThumbRemote">
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:navigationBarColor">#F6F5F0</item>
+    </style>
+</resources>

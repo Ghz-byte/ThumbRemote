@@ -1,0 +1,9 @@
+android/.gradle/
+android/.kotlin/
+android/.idea/
+android/local.properties
+android/**/build/
+.tools/
+.superpowers/
+*.iml
+*.log

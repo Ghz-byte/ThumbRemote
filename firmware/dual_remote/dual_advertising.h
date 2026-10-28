@@ -1,0 +1,12 @@
+#pragma once
+#include <array>
+#include <cstdint>
+namespace dual_remote {
+inline std::array<uint8_t,29> advertisingPayload(){
+  return {{2,1,6,17,7,0xd0,0x0e,0x98,0x9f,0x4d,0x75,0x12,0xb5,0x84,0x48,0xf1,0xad,0xf6,0x1a,0x10,0x50,
+           3,3,0x12,0x18,3,0x19,0xc1,0x03}};
+}
+inline std::array<uint8_t,13> scanResponsePayload(){
+  return {{12,9,'T','h','u','m','b','R','e','m','o','t','e'}};
+}
+}
